@@ -1,0 +1,6 @@
+{
+  "extends": "./packages/tsconfig/base.json",
+  "compilerOptions": {},
+  "references": [{ "path": "apps/core" }, { "path": "apps/web" }],
+  "include": []
+}
