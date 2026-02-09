@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AwardStepper } from '@/components/awards/award-stepper';
@@ -12,6 +13,7 @@ import {
 } from '@/data/mock-award-allocation';
 
 export function AwardAllocationPage() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedScenario, setSelectedScenario] = useState<string>();
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,7 +60,13 @@ export function AwardAllocationPage() {
             <AwardStepper
               steps={awardSteps}
               currentStep={currentStep}
-              onStepClick={setCurrentStep}
+              onStepClick={(index) => {
+                if (index === 1) {
+                  navigate('/awards/details');
+                } else {
+                  setCurrentStep(index);
+                }
+              }}
             />
 
             {/* Right: Actions */}
@@ -80,6 +88,7 @@ export function AwardAllocationPage() {
               </Button>
               <Button
                 size="sm"
+                onClick={() => navigate('/awards/details')}
                 className="h-9 text-sm px-6 bg-violet-600 hover:bg-violet-700 font-medium shadow-sm"
               >
                 Next
